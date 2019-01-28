@@ -1,0 +1,42 @@
+<launch>
+	<node if="true" pkg="gps_converter" type="gps_converter" name="gps_converter" output="screen">
+        <remap from="~imu" to="/djiros/imu" />
+        <remap from="~gps" to="/djiros/gps" />
+        <remap from="~velo" to="/djiros/velo" />
+        <param name="signal_sample_duration" value="0.1" />
+        <param name="std_factor" value="2.0" />
+    </node>
+
+    <node pkg="odometry_assist" type="odometry_assist_node" name="gps_vis" output="screen" >
+        <rosparam>
+            default:
+                base_frame_id: "world"
+
+            tf:
+                enable: false
+                # base_frame_id: "world" # can be omitted or overwrite default/base_frame_id
+                body_frame_id: "ekf"
+                intermediate_frame_id: "intermediate"
+                intermediate_frame_enable: false
+                base_alias_frame_id: "map"
+                base_alias_frame_enable: false
+
+            velocity:
+                enable: false
+                color: # can be omitted or overwrite default/color
+                  r: 1.0
+                  g: 0.0
+                  b: 0.0
+                  a: 1.0
+
+            path:
+                enable: true
+                decimation: 10 # no decimation when less than 1 
+                max_history: -1.0 # infinite history when less than 0
+
+            euler:
+                enable: false
+        </rosparam>
+        <remap from="~odom" to="/gps_converter/odom" />
+    </node>
+</launch>

@@ -1,0 +1,100 @@
+# 2995 + 680(batt) = 3675
+mass        : 0.9
+gra         : 9.8
+hov_percent : 0.18
+full_thrust : 60
+ctrl_rate   : 200.0
+js_ctrl_lock_velo: 0.5
+
+hover:
+    set_hov_percent_to_zero: false
+    use_hov_percent_kf: true
+    vert_velo_limit_for_update: 0.2
+    vert_height_limit_for_update: 0.2
+    percent_lower_limit: 0.10
+    percent_higher_limit: 0.80
+
+gain:
+    hover:
+        # Controller gain in minimun snap
+        Kp0: 1.55
+        Kp1: 1.55
+        Kp2: 1.55
+        Kv0: 1.5
+        Kv1: 1.5
+        Kv2: 1.5
+        Kvi0: 0.0
+        Kvi1: 0.0
+        Kvi2: 0.0
+        Ka0: 0.95
+        Ka1: 0.95
+        Ka2: 0.95
+        Kr0: 0.5
+        Kr1: 0.5
+        Kr2: 0.1
+        Kw0: 0.07
+        Kw1: 0.07
+        Kw2: 0.07
+        Omega_p_roll: 8.0
+        Omega_p_pitch: 8.0
+        Omega_p_yaw: 6.0
+        Omega_d_roll: 0.1
+        Omega_d_pitch: 0.1
+        Omega_d_yaw: 0.1
+        ctrl_limit:
+            pos_norm: 0.3
+            spd_norm: 0.5
+            f_norm: 2000.0
+            switch_angle: -100.0  # switch to ctrl angle
+    track:
+        Kp0: 6.5
+        Kp1: 6.5
+        Kp2: 8.5
+        Kv0: 2.25
+        Kv1: 2.25
+        Kv2: 4.50  # 5.0 is vibration
+        Kvi0: 0.0
+        Kvi1: 0.0
+        Kvi2: 0.0
+        Ka0: 1.0
+        Ka1: 1.0
+        Ka2: 1.0
+        Kr0: 0.5
+        Kr1: 0.5
+        Kr2: 0.1
+        Kw0: 0.07
+        Kw1: 0.07
+        Kw2: 0.07
+        Omega_p_roll: 17.0  # 25 is vibration, 20 is tight
+        Omega_p_pitch: 17.0
+        Omega_p_yaw: 12.0
+        Omega_d_roll: 0.1
+        Omega_d_pitch: 0.1
+        Omega_d_yaw: 0.1
+        ctrl_limit:
+            pos_norm: 0.3   # 0.3 m
+            spd_norm: 2.0   # 2.0 m/s
+            f_norm: 2000.0 # N = m*a
+            switch_angle: 00.0  # switch to ctrl angle
+idling:
+    desired_height_limit:   -1.10
+    desired_velo_limit:     0.10
+    feedback_velo_limit:    0.10
+    js_thrust_limit:        0.1
+    landing_timeout:        1.0
+    landing_thrust_percent: 0.6
+    lowest_thrust:          0.05
+
+rc:
+    hori_velo_scale:   3.0
+    vert_velo_scale:   3.0
+    # rad 30~0.523 45~0.785 60~1.047
+    yaw_scale:         0.523
+    attitude_scale:    0.523
+    deadzone:          0.1
+    exit_cmd_deadzone: 0.2
+
+msg_timeout:
+    odom: 7
+    rc: 0.2
+    cmd: 7
