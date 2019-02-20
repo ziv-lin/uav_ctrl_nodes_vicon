@@ -1,0 +1,2 @@
+killall roslaunch
+killall pos_vel_mocap
